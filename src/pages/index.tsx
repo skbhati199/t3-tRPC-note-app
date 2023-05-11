@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         <meta name="description" content="Full stack todo app" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#0f1235] to-[#090920]">
+      <main data-theme="light"  className="flex min-h-screen flex-col items-center justify-center ">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           {sessionData && (
             <div className="grid grid-cols-1 gap-4 md:gap-8">
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
                 {sessionData && <span>Logged in as {sessionData.user?.email}</span>}
               </p>
               <button
-                className="btn btn-outline btn-error"
+                className={`btn btn-outline ${sessionData ? 'btn-error' : 'btn-success'}`}
                 onClick={sessionData ? () => void signOut() : () => void signIn()}
               >
                 {sessionData ? "Sign out" : "Sign in"}
