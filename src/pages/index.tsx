@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         <meta name="description" content="Full stack todo app" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <main data-theme="light"  className="flex min-h-screen flex-col items-center justify-center ">
+      <main data-theme="business"  className="flex min-h-screen flex-col items-center justify-center ">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           {sessionData && (
             <div className="grid grid-cols-1 gap-4 md:gap-8">
