@@ -5,36 +5,20 @@ import {
   publicProcedure,
   protectedProcedure,
 } from "~/server/api/trpc";
-import { todoIput } from "~/types";
+import { todoInput } from "~/types";
 
 export const todoRouter = createTRPCRouter({
-  all: protectedProcedure.query(() => {
-    return [
-      {
-        id: "fake",
-        text: " text fake",
-        done: false,
+  all: protectedProcedure.query(async ({ ctx }) => {
+    const todos = await ctx.prisma.todo.findMany({
+      where: {
+        userId: ctx.session.user.id,
       },
-      {
-        id: "fake",
-        text: " text fake",
-        done: false,
-      },
-      {
-        id: "fake",
-        text: " text fake",
-        done: false,
-      },
-      {
-        id: "fake",
-        text: " text fake",
-        done: false,
-      },
-    ];
+    });
+    return todos.map(({ id, text, done }) => ({ id, text, done }));
   }),
 
   create: protectedProcedure
-    .input(todoIput)
+    .input(todoInput)
     .mutation(async ({ ctx, input }) => {
       return ctx.prisma.todo.create({
         data: {
